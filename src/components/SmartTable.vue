@@ -3,16 +3,27 @@
 		.SmartTable__header
 			.SmartTable__headerText
 				template(v-if='!isEdited') {{name}}
-				template(v-else, v-model='name', v-on:blur='isEdited = false' @keyup.enter='isEdited = false')
-					input.SmartTable__input.SmartTable__input--hidden
+				template(v-else)
+					input.SmartTable__input.SmartTable__input--hidden(v-model='name', v-on:blur='isEdited = false', @keyup.enter='isEdited = false')
 			.SmartTable__headerButtons
+				.SmartTable__button(:style='{background: color}', v-on:click='isEdited = true') edit
+				.SmartTable__button(:style='{background: color}', v-on:click='colorPanelShown = !colorPanelShown') palette
+				slot
 		.SmartTable__inputs
+			input.SmartTable__input(v-for='(column, index) in columns', v-model='newRow[index]')
+			.SmartTable__button(:style='{background: color}', v-on:click='pushRow') add
 		table
 			tr
-			tr
+				SmartCell(v-for='(column, index) in columns', :text='column', primary='true', :color='color')
+					.SmartTable__button.SmartTable__button--red(style='margin: 0', v-on:click='deleteColumn(index)') delete
+				.SmartTable__button(v-on:click='pushColumn', :style='{background: color}') add
+			tr(v-for='(row, index) in rows')
+				SmartCell(v-for='cell in row', :text='cell', :key='')
+				.SmartTable__button.SmartTable__button--red(v-on:click='deleteRow(index)') delete
 </template>
 
 <script>
+import SmartCell from '@/components/SmartCell'
 
 export default {
 	name: 'SmartTable',
@@ -25,6 +36,42 @@ export default {
 			columns: ['Click me to edit'],
 			rows: []
 		}
+	},
+	components: {SmartCell},
+	methods: {
+		pushRow: function () {
+			this.rows.push([...this.newRow])
+			this.newRow = []
+		},
+		deleteRow: function (index) {
+			this.rows.splice(index, 1)
+		},
+		pushColumn: function () {
+			if (this.columns.length < 5) {
+				this.columns.push('Click me to edit')
+				this.newRow.push('')
+				this.rows.map((row) => {
+					while (row.length < this.columns.length) {
+						row.push('Click me to edit')
+					}
+				})
+			}
+		},
+		deleteColumn: function (index) {
+			this.columns.splice(index, 1)
+			this.rows.map((row) => {
+				row.splice(index, 1)
+			})
+		},
+		setColor: function (color) {
+			this.color = color
+			this.colorPanelShown = false
+		}
+	},
+	created: function () {
+		this.columns.map(() => {
+			this.newRow.push('')
+		})
 	}
 }
 </script>
