@@ -1,5 +1,6 @@
 <template lang='pug'>
 	.SmartTable
+		ColorPicker(v-if='colorPickerVisible' @colorChanged='setColor')
 		.SmartTable__header
 			.SmartTable__headerText
 				template(v-if='!isEdited') {{name}}
@@ -7,40 +8,43 @@
 					input.SmartTable__input.SmartTable__input--hidden(v-model='name', v-on:blur='isEdited = false', @keyup.enter='isEdited = false')
 			.SmartTable__headerButtons
 				.SmartTable__button(:style='{background: color}', v-on:click='isEdited = true') edit
-				.SmartTable__button(:style='{background: color}', v-on:click='colorPanelShown = !colorPanelShown') palette
+				.SmartTable__button(:style='{background: color}', v-on:click='colorPickerVisible = !colorPickerVisible') palette
 				slot
 		.SmartTable__inputs
-			input.SmartTable__input(v-for='(column, index) in columns', v-model='newRow[index]')
+			input.SmartTable__input(v-for='(column, index) in columns', v-model='newRow[index]' @keyup.enter='pushRow')
 			.SmartTable__button(:style='{background: color}', v-on:click='pushRow') add
 		table
 			tr
-				SmartCell(v-for='(column, index) in columns', :text='column', primary='true', :color='color')
+				SmartCell(v-for='(column, index) in columns', :text='column.text', primary='true', :color='color' :key='column.id')
 					.SmartTable__button.SmartTable__button--red(style='margin: 0', v-on:click='deleteColumn(index)') delete
 				.SmartTable__button(v-on:click='pushColumn', :style='{background: color}') add
-			tr(v-for='(row, index) in rows')
-				SmartCell(v-for='cell in row', :text='cell', :key='')
-				.SmartTable__button.SmartTable__button--red(v-on:click='deleteRow(index)') delete
+			tr(v-for='(row, rowIndex) in rows')
+				SmartCell(v-for='(cell, cellIndex) in row', :text='cell.text', :key='cell.id')
+				.SmartTable__button.SmartTable__button--red(v-on:click='deleteRow(rowIndex)') delete
 </template>
 
 <script>
 import SmartCell from '@/components/SmartCell'
+import ColorPicker from '@/components/ColorPicker'
 
 export default {
 	name: 'SmartTable',
 	data () {
 		return {
+			nextCellId: 1,
 			color: '#0084ff',
+			colorPickerVisible: false,
 			name: 'New Table',
 			isEdited: false,
 			newRow: [],
-			columns: ['Click me to edit'],
+			columns: [{id: 0, text: 'Click me to edit'}],
 			rows: []
 		}
 	},
-	components: {SmartCell},
+	components: {SmartCell, ColorPicker},
 	methods: {
 		pushRow: function () {
-			this.rows.push([...this.newRow])
+			this.rows.push(this.newRow.map(newRow => ({id: this.nextCellId++, text: newRow})))
 			this.newRow = []
 		},
 		deleteRow: function (index) {
@@ -48,11 +52,11 @@ export default {
 		},
 		pushColumn: function () {
 			if (this.columns.length < 5) {
-				this.columns.push('Click me to edit')
+				this.columns.push({id: this.nextCellId++, text: 'New column'})
 				this.newRow.push('')
 				this.rows.map((row) => {
 					while (row.length < this.columns.length) {
-						row.push('Click me to edit')
+						row.push({id: this.nextCellId++, text: ''})
 					}
 				})
 			}
@@ -65,7 +69,7 @@ export default {
 		},
 		setColor: function (color) {
 			this.color = color
-			this.colorPanelShown = false
+			this.colorPickerVisible = false
 		}
 	},
 	created: function () {

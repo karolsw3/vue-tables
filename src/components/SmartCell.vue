@@ -1,7 +1,7 @@
 <template lang='pug'>
 	.SmartCell(:class='{"SmartCell--primary": primary}', :style='{background: color, padding: isEdited ? "5px 20px":"10px 20px"}', v-on:click='isEdited = true')
-		div(v-if='!isEdited') {{text}}
-		input.SmartCell__input.SmartCell__input--hidden(v-else, v-model='text', v-on:blur='isEdited = false', @keyup.enter='isEdited = false')
+		div(v-if='!isEdited') {{staticText}}
+		input.SmartCell__input.SmartCell__input--hidden(v-else, v-model='staticText', v-on:blur='isEdited = false', @keyup.enter='isEdited = false')
 		slot(v-if='isEdited')
 </template>
 
@@ -12,7 +12,18 @@ export default {
 	props: ['text', 'primary', 'color'],
 	data () {
 		return {
+			newText: this.text,
 			isEdited: false
+		}
+	},
+	computed: {
+		staticText: {
+			get: function () {
+				return this.newText
+			},
+			set: function (newValue) {
+				this.newText = newValue
+			}
 		}
 	}
 }
