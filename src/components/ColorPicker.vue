@@ -30,12 +30,20 @@ export default {
 	animationDuration = 0.12s
 
 	.ColorPicker
+		@keyframes onShow
+			0%
+				opacity 0
+				margin-top 0
+			100%
+				opacity 1
+				margin-top 30px
+
 		position absolute
-		margin 20px auto
+		width 200px	
+		height 200px
+		margin 30px auto
 		left 0
 		right 0
-		height 200px
-		width 200px
 		z-index 3
 		background white
 		display flex
@@ -44,6 +52,9 @@ export default {
 		align-items center
 		border-radius borderRadius
 		box-shadow 0 0 30px #aaa
+		animation-name onShow
+		animation-duration animationDuration
+		animation-timing-function ease-in
 		transition all animationDuration
 		&__colorSlot
 			box-sizing border-box

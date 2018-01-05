@@ -10,7 +10,7 @@ export default {
 	name: 'TableManager',
 	data () {
 		return {
-			msg: 'Welcome to Your Vue.js App'
+			tables: {id: 0}
 		}
 	},
 	components: {SmartTable}
