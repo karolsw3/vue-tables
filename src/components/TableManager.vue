@@ -1,19 +1,33 @@
 <template lang='pug'>
-  .TableManager
-    SmartTable
+	.TableManager
+		SmartMenu
+			.menu__button(v-on:click='pushTable') New table
+		SmartTable(v-for='(table, index) in tables' :key='table.id')
+			.SmartTable__button.SmartTable__button--red(v-on:click='deleteTable(index)') 
+					p delete
 </template>
 
 <script>
+import SmartMenu from '@/components/SmartMenu'
 import SmartTable from '@/components/SmartTable'
 
 export default {
 	name: 'TableManager',
 	data () {
 		return {
-			tables: {id: 0}
+			nextTableId: 1,
+			tables: [{id: 0}]
 		}
 	},
-	components: {SmartTable}
+	methods: {
+		pushTable: function () {
+			this.tables.push({id: this.nextTableId++})
+		},
+		deleteTable: function (index) {
+			this.tables.splice(index, 1)
+		}
+	},
+	components: {SmartMenu, SmartTable}
 }
 </script>
 

@@ -95,7 +95,7 @@ export default {
   borderRadius = 25px
 
   .SmartTable
-    margin 20px auto
+    margin 60px auto
     width 80%
     max-width 900px
     padding 2px
