@@ -1,6 +1,6 @@
 <template lang='pug'>
-	.TableManager
-		SmartMenu
+	.TableManager(:style='{background: color}')
+		SmartMenu(@colorChanged='setColor')
 			.menu__button(v-on:click='pushTable') New table
 		SmartTable(v-for='(table, index) in tables' :key='table.id')
 			.SmartTable__button.SmartTable__button--red(v-on:click='deleteTable(index)') 
@@ -15,13 +15,21 @@ export default {
 	name: 'TableManager',
 	data () {
 		return {
+			color: '#fff',
 			nextTableId: 1,
 			tables: [{id: 0}]
 		}
 	},
 	methods: {
+		setColor: function (color) {
+			this.color = color
+		},
 		pushTable: function () {
 			this.tables.push({id: this.nextTableId++})
+			var objDiv = document.getElementsByClassName('TableManager')[0]
+			setTimeout(() => {
+				objDiv.scrollTop = 999999
+			}, 10)
 		},
 		deleteTable: function (index) {
 			this.tables.splice(index, 1)
@@ -33,10 +41,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='stylus' scoped>
-  .TableManager
-    width 100%
-    height 100%
-    margin 0
-    padding 0
-    background #ffffff
+	.TableManager
+		overflow-y auto
+		background #ffffff
+		height 100vh
 </style>

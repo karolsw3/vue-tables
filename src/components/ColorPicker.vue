@@ -8,12 +8,10 @@
 
 export default {
 	name: 'ColorPicker',
+	props: ['colors'],
 	data () {
 		return {
-			color: '#0084ff',
-			colors: ['#0084ff', '#ffc300', '#4af844',
-				'#7646ff', '#a695c7', '#ff5ca1',
-				'#fa3c4c', '#f56b78', '#33343f']
+			color: '#0084ff'
 		}
 	},
 	methods: {
@@ -36,22 +34,21 @@ export default {
 				margin-top 0
 			100%
 				opacity 1
-				margin-top 30px
+				margin-top 50px
 
 		position absolute
-		width 200px	
+		width 200px
 		height 200px
-		margin 30px auto
+		margin 50px auto
 		left 0
 		right 0
 		z-index 3
-		background white
+		background #fff
 		display flex
 		flex-wrap wrap
 		justify-content center
 		align-items center
 		border-radius borderRadius
-		box-shadow 0 0 30px #aaa
 		animation-name onShow
 		animation-duration animationDuration
 		animation-timing-function ease-in
@@ -64,6 +61,7 @@ export default {
 		&__color
 			height 100%
 			width 100%
+			border 4px solid #eee
 			border-radius 100px
 			cursor pointer
 			background #eee
