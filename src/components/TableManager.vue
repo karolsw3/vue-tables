@@ -1,5 +1,5 @@
 <template lang='pug'>
-	.TableManager(:style='{background: color}')
+	.TableManager(:style='style')
 		SmartMenu(@colorChanged='setColor')
 			.menu__button(v-on:click='pushTable') New table
 		SmartTable(v-for='(table, index) in tables' :key='table.id')
@@ -15,21 +15,25 @@ export default {
 	name: 'TableManager',
 	data () {
 		return {
-			color: '#fff',
+			style: {
+				background: '#fff'
+			},
 			nextTableId: 1,
 			tables: [{id: 0}]
 		}
 	},
 	methods: {
 		setColor: function (color) {
-			this.color = color
+			this.style.background = color
 		},
 		pushTable: function () {
 			this.tables.push({id: this.nextTableId++})
-			var objDiv = document.getElementsByClassName('TableManager')[0]
-			setTimeout(() => {
-				objDiv.scrollTop = 999999
-			}, 10)
+			var tableManager = document.getElementsByClassName('TableManager')[0]
+			for (let i = 0; i < tableManager.scrollHeight; i++) {
+				setTimeout(() => {
+					tableManager.scrollTop += 1
+				}, 1 + (1 / i))
+			}
 		},
 		deleteTable: function (index) {
 			this.tables.splice(index, 1)
@@ -45,4 +49,5 @@ export default {
 		overflow-y auto
 		background #ffffff
 		height 100vh
+		transition all 0.12s
 </style>

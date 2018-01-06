@@ -5,7 +5,7 @@
 			slot
 			.menu__button.menu__button--icon(v-on:click='colorPickerVisible = !colorPickerVisible')
 				p palette
-			ColorPicker(v-if='colorPickerVisible' @colorChanged='setColor' :colors=['#fff','#122','#6f677b','#27364c','#1b4f9c'])
+			ColorPicker(v-if='colorPickerVisible' @colorChanged='setColor' :colors=['#fff', '#0084ff', '#6f677b', '#ff5ca1', '#1b4f9c', '#7646ff', '#fa3c4c', '#f56b78', '#33343f'])
 </template>
 
 <script>

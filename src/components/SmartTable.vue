@@ -95,8 +95,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='stylus' scoped>
   borderRadius = 25px
+	animationDuration = 0.23s
 
 	.SmartTable
+		@keyframes onShow
+			0%
+				opacity 0
+			100%
+				opacity 1
 		margin 60px auto
 		width 80%
 		max-width 900px
@@ -104,6 +110,10 @@ export default {
 		border-radius borderRadius
 		background white
 		border 1px solid #ccc
+		animation-name onShow
+		animation-duration animationDuration
+		animation-timing-function ease-in
+		transition all animationDuration
 		&__header
 			display flex
 			justify-content space-between

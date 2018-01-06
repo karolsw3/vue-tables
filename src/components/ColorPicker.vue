@@ -48,6 +48,7 @@ export default {
 		flex-wrap wrap
 		justify-content center
 		align-items center
+		border 1px solid #ccc
 		border-radius borderRadius
 		animation-name onShow
 		animation-duration animationDuration
@@ -64,7 +65,7 @@ export default {
 			border 4px solid #eee
 			border-radius 100px
 			cursor pointer
-			background #eee
+			background #f2f2f2
 			transition all animationDuration
 			&:hover
 				opacity 0.7			
