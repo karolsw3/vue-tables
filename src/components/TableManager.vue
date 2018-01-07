@@ -2,9 +2,10 @@
 	.TableManager(:style='style')
 		SmartMenu(@colorChanged='setColor')
 			.menu__button(v-on:click='pushTable') New table
-		SmartTable(v-for='(table, index) in tables' :key='table.id')
-			.SmartTable__button.SmartTable__button--red(v-on:click='deleteTable(index)') 
-					p delete
+		.TableManager__tables
+			SmartTable(v-for='(table, index) in tables' :key='table.id')
+				.SmartTable__button.SmartTable__button--red(v-on:click='deleteTable(index)') 
+						p delete
 </template>
 
 <script>
@@ -32,7 +33,7 @@ export default {
 			for (let i = 0; i < tableManager.scrollHeight; i++) {
 				setTimeout(() => {
 					tableManager.scrollTop += 1
-				}, 1 + (1 / i))
+				}, 1 + (2 / i))
 			}
 		},
 		deleteTable: function (index) {
@@ -50,4 +51,7 @@ export default {
 		background #ffffff
 		height 100vh
 		transition all 0.12s
+		&__tables
+			margin-top 50px
+			overflow-y auto
 </style>

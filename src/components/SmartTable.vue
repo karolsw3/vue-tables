@@ -106,7 +106,7 @@ export default {
 		margin 60px auto
 		width 80%
 		max-width 900px
-		padding 2px
+		padding 0
 		border-radius borderRadius
 		background white
 		border 1px solid #ccc
@@ -124,7 +124,7 @@ export default {
 			width 100%
 			text-align center
 			cursor default
-			border-bottom 2px solid #f5f5f5
+			border-bottom 1px solid #ccc
 			box-sizing border-box
 		&__headerText
   		width 100%

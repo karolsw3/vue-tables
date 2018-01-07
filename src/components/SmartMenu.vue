@@ -5,7 +5,7 @@
 			slot
 			.menu__button.menu__button--icon(v-on:click='colorPickerVisible = !colorPickerVisible')
 				p palette
-			ColorPicker(v-if='colorPickerVisible' @colorChanged='setColor' :colors=['#fff', '#0084ff', '#6f677b', '#ff5ca1', '#1b4f9c', '#7646ff', '#fa3c4c', '#f56b78', '#33343f'])
+			ColorPicker(v-if='colorPickerVisible' @colorChanged='setColor' :colors=['white', '#0084ff', '#6f677b', '#ff5ca1', '#1b4f9c', '#7646ff', '#fa3c4c', '#f56b78', '#33343f'])
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
 	justify-content space-between
 	align-items center
 	background white
-	border-bottom 1px solid #eee
+	border-bottom 1px solid #ccc
 	box-sizing border-box
 	&__header
 		padding 0 20px

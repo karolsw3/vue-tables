@@ -20,6 +20,8 @@ html, body
 	background-attachment fixed
 	min-height 100vh
 	overflow hidden
+a
+	text-decoration none
 body
 	height 100%
 #app

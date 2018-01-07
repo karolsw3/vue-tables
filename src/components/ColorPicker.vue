@@ -1,7 +1,7 @@
 <template lang='pug'>
 	.ColorPicker
 		.ColorPicker__colorSlot(v-for='color in colors')
-			.ColorPicker__color(:style='{background: color}', @click='setColor(color)')
+			.ColorPicker__color(:style='{background: color}', @click='setColor(color)' :class='{"ColorPicker__color--border": (color == "white")}')
 </template>
 
 <script>
@@ -62,11 +62,12 @@ export default {
 		&__color
 			height 100%
 			width 100%
-			border 4px solid #eee
 			border-radius 100px
 			cursor pointer
 			background #f2f2f2
 			transition all animationDuration
 			&:hover
-				opacity 0.7			
+				opacity 0.7
+			&--border
+				border 1px solid #ccc			
 </style>
