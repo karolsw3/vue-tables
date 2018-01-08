@@ -3,9 +3,10 @@
 		.menu__header Smart tables
 		.menu__buttons
 			slot
-			.menu__button.menu__button--icon(v-on:click='colorPickerVisible = !colorPickerVisible')
+			.button.button--icon(v-on:click='colorPickerVisible = !colorPickerVisible')
 				p palette
 			ColorPicker(v-if='colorPickerVisible' @colorChanged='setColor' :colors=['white', '#0084ff', '#6f677b', '#ff5ca1', '#1b4f9c', '#7646ff', '#fa3c4c', '#f56b78', '#33343f'])
+			router-link.button.button--icon.button--red(to='/') clear
 </template>
 
 <script>
@@ -52,24 +53,5 @@ export default {
 		font-weight 900
 	&__buttons
 		display flex
-	&__button
-		position relative
-		height 100%
-		cursor pointer
-		background #0084ff
-		color white
-		margin 0 10px
-		padding 5px 20px
-		border-radius 99px
-		transition-duration animationDuration
-		box-sizing border-box
-		&--icon
-			padding 5px
-			font-family 'Material Icons'
-			p
-				margin 0
-		&:hover
-			filter :brightness(0.9)
-		&--red
-			background #fa3c4c		
+		align-items center	
 </style>

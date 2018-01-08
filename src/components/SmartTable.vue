@@ -9,25 +9,25 @@
 				template(v-else)
 					input.SmartTable__input.SmartTable__input--hidden(v-model='name', v-on:blur='isEdited = false', @keyup.enter='isEdited = false')
 			.SmartTable__headerButtons
-				.SmartTable__button(:style='{background: color}', v-on:click='isEdited = true') 
+				.button.button--icon(:style='{background: color}', v-on:click='isEdited = true') 
 					p edit
-				.SmartTable__button(:style='{background: color}', v-on:click='colorPickerVisible = !colorPickerVisible') 
+				.button.button--icon(:style='{background: color}', v-on:click='colorPickerVisible = !colorPickerVisible') 
 					p palette
 				slot
 		.SmartTable__inputs
 			input.SmartTable__input(v-for='(column, index) in columns', v-model='newRow[index]' @keyup.enter='pushRow')
-			.SmartTable__button(:style='{background: color}', v-on:click='pushRow') 
+			.button.button--icon(:style='{background: color}', v-on:click='pushRow') 
 				p add
 		table
 			tr
 				SmartCell(v-for='(column, index) in columns', :text='column.text', primary='true', :color='color' :key='column.id')
-					.SmartTable__button.SmartTable__button--red(style='margin: 0', v-on:click='deleteColumn(index)') 
+					.button.button--icon.button--red(style='margin: 0', v-on:click='deleteColumn(index)') 
 						p delete
-				.SmartTable__button(v-on:click='pushColumn', :style='{background: color}') 
+				.button.button--icon(v-on:click='pushColumn', :style='{background: color}') 
 					p add
 			tr(v-for='(row, rowIndex) in rows')
 				SmartCell(v-for='(cell, cellIndex) in row', :text='cell.text', :key='cell.id')
-				.SmartTable__button.SmartTable__button--red(v-on:click='deleteRow(rowIndex)') delete
+				.button.button--red.button--icon(v-on:click='deleteRow(rowIndex)') delete
 </template>
 
 <script>
@@ -166,25 +166,4 @@ export default {
 			padding 5px
 			box-sizing border-box
 			justify-content space-between
-		&__button
-			font-family 'Material Icons'
-			font-weight 900
-			height 100%
-			cursor pointer
-			background #0084ff
-			color white
-			margin 2px
-			padding 5px 6px
-			border-radius 99px
-			transition-duration 0.1s
-			box-sizing border-box
-			&:hover
-				opacity 0.7
-			&--red
-				background #fa3c4c
-				border 2px solid white
-			p
-				padding 0
-				margin 0
-				user-select none
 </style>

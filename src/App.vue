@@ -27,4 +27,26 @@ body
 #app
 	font-family 'Roboto', Helvetica, Arial, sans-serif
 	height 100%
+
+.button
+	position relative
+	height 100%
+	cursor pointer
+	background #0084ff
+	color white
+	margin 0 10px
+	padding 5px 20px
+	border-radius 99px
+	transition-duration 0.12s
+	box-sizing border-box
+	p
+		margin 0
+	&--red
+		background #fa3c4c
+		border 2px solid white
+	&--icon
+		padding 8px
+		font-family 'Material Icons'
+	&:hover
+		filter :brightness(0.9)	
 </style>

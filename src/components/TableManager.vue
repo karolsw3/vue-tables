@@ -1,10 +1,10 @@
 <template lang='pug'>
 	.TableManager(:style='style')
 		SmartMenu(@colorChanged='setColor')
-			.menu__button(v-on:click='pushTable') New table
+			.button(v-on:click='pushTable') New table
 		.TableManager__tables
 			SmartTable(v-for='(table, index) in tables' :key='table.id')
-				.SmartTable__button.SmartTable__button--red(v-on:click='deleteTable(index)') 
+				.button.button--red.button--icon(v-on:click='deleteTable(index)') 
 						p delete
 </template>
 
